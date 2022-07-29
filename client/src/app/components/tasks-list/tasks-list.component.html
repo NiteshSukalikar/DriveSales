@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h2 class="h2">Books List</h2>
+    </div>
+   
+    <div class="table-responsive text-center">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">StartTime</th>
+            <th scope="col">EndTime</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Status</th>
+            <th class="text-center" scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of Tasks; let i = index">
+            <th scope="row">{{task._id}}</th>
+            <td>{{task.title}}</td>
+            <td>{{task.description}}</td>
+            <td>{{task.startTime | date }}</td>
+            <td>{{task.endTime | date }}</td>
+            <td>{{task.priority == 1 ? 'Low' : task.priority == 2 ? 'Medium' : 'High'}}</td>
+            <td>{{task.status == false ? 'Pending' : 'Completed'}}</td>
+            <td class="text-center">
+              <button [disabled]="task.status == true" class="btn btn-sm btn-primary me-3" routerLink="/edit-task/{{task._id}}">Complete</button>
+              <button class="btn btn-sm btn-danger" (click)="delete(task._id, i)">Delete</button>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
